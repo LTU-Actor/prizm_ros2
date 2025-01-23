@@ -21,9 +21,9 @@ def twist_to_point(msg : Twist) -> tuple[float, float]:
     left *= SPEED_MUX
     right *= SPEED_MUX
     
-    left = max(left, 0)
+    left = max(left, -100)
     left = min(left, 100)
-    right = max(right, 0)
+    right = max(right, -100)
     right = min(right, 100)
     
     return (left, right)
@@ -50,9 +50,11 @@ class PRIZM_Node(Node):
         self.create_subscription(Twist, "red_led", self.red_cb, 10)
 
     def writePrizmSerial(self):
-        self.serial_conn.write(bytes(f"left:{self.leftMotorState},right:{self.rightMotorState},green:{self.greenLedState},red:{self.redLedState};", "ascii"))
+        control_msg = f"left:{self.leftMotorState},right:{self.rightMotorState},green:{self.greenLedState},red:{self.redLedState};"
+        self.serial_conn.write(bytes(control_msg, "ascii"))
         
     def twist_cb(self, msg : Twist):
+        
         self.leftMotorState, self.rightMotorState = twist_to_point(msg)
         self.writePrizmSerial()
         
