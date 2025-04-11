@@ -30,7 +30,7 @@ ros2 launch prizm_ros2 launch.py serial_port:=<path to PRIZM controller>
 ### Topics
 Name | Message Type | Description
 -----|--------------|--------------
-twist_controller | geometry_msgs/Twist | Controls robot movement.
+cmd_vel | geometry_msgs/Twist | Controls robot movement.
 green_led | std_msgs/Bool | Controls the state of the green LED.
 red_led | std_msgs/Bool | Controls the state of the red LED.
 
