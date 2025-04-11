@@ -45,7 +45,7 @@ class PRIZM_Node(Node):
         self.get_logger().log(serial_param.value, 20)
         self.serial_conn = Serial(serial_param.value, 115200)
         
-        self.create_subscription(Twist, "twist_controller", self.twist_cb, 10)
+        self.create_subscription(Twist, "cmd_vel", self.twist_cb, 10)
         self.create_subscription(Twist, "green_led", self.green_cb, 10)
         self.create_subscription(Twist, "red_led", self.red_cb, 10)
 
